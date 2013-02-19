@@ -1044,7 +1044,9 @@ class RedditController(MinimalController):
                 return self.intermediate_redirect("/over18")
 
             # PPAU: redirect to login if not logged in
-            if not c.user_is_loggedin and not request.path.startswith("/login"):
+            if not c.user_is_loggedin and\
+                    not request.path.startswith("/login") and\
+                    not request.path.startswith("/api"):
                 return self.intermediate_redirect("/login")
 
         #check whether to allow custom styles
