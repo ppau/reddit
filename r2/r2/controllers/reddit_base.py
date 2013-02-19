@@ -1043,6 +1043,10 @@ class RedditController(MinimalController):
                 and c.render_style == 'html'):
                 return self.intermediate_redirect("/over18")
 
+            # PPAU: redirect to login if not logged in
+            if not c.user_is_loggedin and not request.path.startswith("/login"):
+                return self.intermediate_redirect("/login")
+
         #check whether to allow custom styles
         c.allow_styles = True
         c.can_apply_styles = self.allow_stylesheets
